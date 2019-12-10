@@ -1,0 +1,3 @@
+C:/Users/Aayli/Desktop/Inf 1/C++ 2/Siec/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Aayli/Desktop/Inf 1/C++ 2/Siec/cmake-build-debug/CMakeFiles/Siec.dir
+C:/Users/Aayli/Desktop/Inf 1/C++ 2/Siec/cmake-build-debug/CMakeFiles/edit_cache.dir
