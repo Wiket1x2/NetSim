@@ -1,0 +1,8 @@
+Cz³onkowie grupy 5:
+(1) Krzysztof Kasztelewicz, 302858
+(2) Rafal Gorecki, 302847
+(3) Tomasz Szczerba, 302924
+
+Kierownik grupy: Rafal Gorecki
+
+URL repozytorium: https://github.com/Wiket1x2/NetSim
