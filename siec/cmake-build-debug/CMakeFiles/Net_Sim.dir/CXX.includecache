@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/package.hpp
+iostream
+-
+set
+-
+
+C:/Users/Aayli/Desktop/NetSim/siec/main.cpp
+iostream
+-
+package.hpp
+C:/Users/Aayli/Desktop/NetSim/siec/package.hpp
+
