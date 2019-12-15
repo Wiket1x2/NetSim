@@ -6,8 +6,7 @@
 #define NET_SIM_PACKAGE_HPP
 #include <iostream>
 #include <set>
-
-using ElementID = unsigned int;
+#include "types.hpp"
 
 class Package{
 
