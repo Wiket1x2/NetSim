@@ -1,8 +1,6 @@
 #include <iostream>
 #include "package.hpp"
 
-//std::set<ElementID> Package::assigned_IDs;
-//std::set<ElementID> Package::freed_IDs;
 
 int main() {
 
@@ -24,3 +22,4 @@ int main() {
 //    }
 //    Package C;
 //    ElementID id2 = C.get_id();
+//    std::cout << id << id2 << std::endl;
