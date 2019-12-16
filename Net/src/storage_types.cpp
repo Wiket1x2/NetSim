@@ -3,9 +3,6 @@
 //
 
 
-#ifndef NET_STORAGE_TYPES_HPP
-#define NET_STORAGE_TYPES_HPP
-
 #include "storage_types.hpp"
 
 
@@ -17,20 +14,18 @@ void PackageQueue::push(Package&& package) {
         case PackageQueueType::LIFO:
             pdeq_.emplace_front(std::move(package));
             break;
-
     }
-
 }
 
 Package PackageQueue::pop() {
     Package product;
     switch(storage_type_) {
         case PackageQueueType::FIFO:
-            product=*pdeq_.begin();
+            product = pdeq_.front();
             pdeq_.pop_front();
             break;
         case PackageQueueType::LIFO:
-            product=*pdeq_.rend();
+            product = pdeq_.back();
             pdeq_.pop_back();
             break;
     }
@@ -38,7 +33,5 @@ Package PackageQueue::pop() {
 }
 
 
-
-#endif //NET_STORAGE_TYPES_HPP
 
 

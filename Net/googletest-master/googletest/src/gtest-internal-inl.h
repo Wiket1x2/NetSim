@@ -266,8 +266,8 @@ GTEST_API_ bool ShouldShard(const char* total_shards_str,
 // and aborts.
 GTEST_API_ int32_t Int32FromEnvOrDie(const char* env_var, int32_t default_val);
 
-// Given the total number of shards, the shard index, and the test id,
-// returns true if and only if the test should be run on this shard. The test id
+// Given the total number of shards, the shard index, and the test id_,
+// returns true if and only if the test should be run on this shard. The test id_
 // is some arbitrary but unique non-negative integer assigned to each test
 // method. Assumes that 0 <= shard_index < total_shards.
 GTEST_API_ bool ShouldRunTestOnShard(

@@ -9,7 +9,6 @@
 #include <deque>
 #include <list>
 
-//uzupelnij consty
 
 enum class PackageQueueType {
     FIFO,
@@ -26,13 +25,14 @@ public:
     virtual deqP_ci end() const=0;
     virtual std::size_t size() const=0;
     virtual bool empty() const=0;
-    virtual ~IPackageStockpile()= 0; //=default? wirtualny czy czysto wirtualny?
+    virtual ~IPackageStockpile()= default; //=default? wirtualny czy czysto wirtualny?
 };
 
 class IPackageQueue: public IPackageStockpile {
 public:
     virtual PackageQueueType get_queue_type() const =0;
     virtual Package pop() =0;
+    virtual ~IPackageQueue() = default;
 };
 
 class PackageQueue: public IPackageQueue {

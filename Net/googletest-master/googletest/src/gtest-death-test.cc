@@ -1012,7 +1012,7 @@ DeathTest::TestRole FuchsiaDeathTest::AssumeRole() {
   fdio_spawn_action_t spawn_actions[2] = {};
   fdio_spawn_action_t* add_handle_action = &spawn_actions[0];
   add_handle_action->action = FDIO_SPAWN_ACTION_ADD_HANDLE;
-  add_handle_action->h.id = PA_HND(PA_FD, kFuchsiaReadPipeFd);
+  add_handle_action->h.id_ = PA_HND(PA_FD, kFuchsiaReadPipeFd);
   add_handle_action->h.handle = child_pipe_handle;
 
   // Create a socket pair will be used to receive the child process' stderr.

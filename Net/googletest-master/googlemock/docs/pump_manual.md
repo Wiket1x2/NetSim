@@ -116,18 +116,18 @@ Func(a1 + a2 + a3);  // If n is 3.
 
 We support the following meta programming constructs:
 
-| `$var id = exp`                  | Defines a named constant value. `$id` is |
+| `$var id_ = exp`                  | Defines a named constant value. `$id_` is |
 :                                  : valid util the end of the current meta   :
 :                                  : lexical block.                           :
 | :------------------------------- | :--------------------------------------- |
-| `$range id exp..exp`             | Sets the range of an iteration variable, |
+| `$range id_ exp..exp`             | Sets the range of an iteration variable, |
 :                                  : which can be reused in multiple loops    :
 :                                  : later.                                   :
-| `$for id sep [[ code ]]`         | Iteration. The range of `id` must have   |
-:                                  : been defined earlier. `$id` is valid in  :
+| `$for id_ sep [[ code ]]`         | Iteration. The range of `id_` must have   |
+:                                  : been defined earlier. `$id_` is valid in  :
 :                                  : `code`.                                  :
 | `$($)`                           | Generates a single `$` character.        |
-| `$id`                            | Value of the named constant or iteration |
+| `$id_`                            | Value of the named constant or iteration |
 :                                  : variable.                                :
 | `$(exp)`                         | Value of the expression.                 |
 | `$if exp [[ code ]] else_branch` | Conditional.                             |
@@ -145,12 +145,12 @@ in such places for a new-line to show up in your output.
 
 ```ebnf
 code ::= atomic_code*
-atomic_code ::= $var id = exp
-    | $var id = [[ code ]]
-    | $range id exp..exp
-    | $for id sep [[ code ]]
+atomic_code ::= $var id_ = exp
+    | $var id_ = [[ code ]]
+    | $range id_ exp..exp
+    | $for id_ sep [[ code ]]
     | $($)
-    | $id
+    | $id_
     | $(exp)
     | $if exp [[ code ]] else_branch
     | [[ code ]]

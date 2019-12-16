@@ -1,5 +1,6 @@
 #include <iostream>
 #include "package.hpp"
+#include "storage_types.hpp"
 
 
 int main() {
@@ -12,9 +13,9 @@ int main() {
 
 
 
-//Test:
+//Test package:
 //    Package A;
-//    ElementID id = A.get_id();
+//    ElementID id_ = A.get_id();
 //    {
 //        Package B;
 //        ElementID id1 = B.get_id();
@@ -22,4 +23,24 @@ int main() {
 //    }
 //    Package C;
 //    ElementID id2 = C.get_id();
-//    std::cout << id << id2 << std::endl;
+//    std::cout << id_ << id2 << std::endl;
+
+//Test lifo:
+//    Package A;
+//    Package B;
+//    PackageQueue lifo(PackageQueueType::LIFO);
+//    lifo.push((Package&&) A);
+//    lifo.push((Package&&) B);
+//    Package D = lifo.pop();
+//    if (D.get_id()==A.get_id())
+//    std::cout<<"Lifo True"<<std::endl;
+
+//Test fifo:
+//    Package A;
+//    Package B;
+//    PackageQueue fifo(PackageQueueType::FIFO);
+//    fifo.push((Package&&) A);
+//    fifo.push((Package&&) B);
+//    Package D = fifo.pop();
+//    if (D.get_id()==A.get_id())
+//    std::cout<<"Fifo True"<<std::endl;

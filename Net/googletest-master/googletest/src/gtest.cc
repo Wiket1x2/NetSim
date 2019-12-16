@@ -5557,8 +5557,8 @@ int32_t Int32FromEnvOrDie(const char* var, int32_t default_val) {
   return result;
 }
 
-// Given the total number of shards, the shard index, and the test id,
-// returns true if and only if the test should be run on this shard. The test id
+// Given the total number of shards, the shard index, and the test id_,
+// returns true if and only if the test should be run on this shard. The test id_
 // is some arbitrary but unique non-negative integer assigned to each test
 // method. Assumes that 0 <= shard_index < total_shards.
 bool ShouldRunTestOnShard(int total_shards, int shard_index, int test_id) {

@@ -165,7 +165,7 @@ export PKG_CONFIG_ALLOW_SYSTEM_LIBS=yes
 ```
 
 otherwise `pkg-config` will filter `-I` and `-L` flags against standard prefixes
-such as `/usr` (see https://bugs.freedesktop.org/show_bug.cgi?id=28264#c3 for
+such as `/usr` (see https://bugs.freedesktop.org/show_bug.cgi?id_=28264#c3 for
 reasons why this stripping needs to occur usually).
 
 If you look at the generated pkg-config file, it will look something like
