@@ -1,5 +1,5 @@
 //
-// Created by Aayli on 15.12.2019.
+// Created by krzys on 15.12.2019.
 //
 
 #ifndef NET_STORAGE_TYPES_HPP
