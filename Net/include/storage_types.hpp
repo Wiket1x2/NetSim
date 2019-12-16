@@ -6,10 +6,30 @@
 #define NET_STORAGE_TYPES_HPP
 
 #include "package.hpp"
+#include <vector>
+#include <deque>
+#include <stack>
 
-enum class PackageQueueType{
+
+enum class PackageQueueType {
     FIFO,
-    LIFO
+    LIFO,
+};
+
+class IPackageStockpile {
+public:
+
+    using deqP_ci=std::deque<Package>::const_iterator;
+    virtual void push(Package&& package) =0; // query - to oznacza ze metoda jest const? ale jak to? przeciez to jest pushparametr const czy nie?
+    virtual deqP_ci cbegin() const =0;
+    virtual deqP_ci cend() const=0;
+    virtual deqP_ci begin() const=0;
+    virtual deqP_ci end() const=0;
+    virtual std::size_t size() const=0;
+    virtual bool empty() const=0;
+    virtual ~IPackageStockpile()= 0; //=default? wirtualny czy czysto wirtualny?
+
+
 };
 
 
