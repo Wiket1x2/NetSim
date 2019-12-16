@@ -13,19 +13,14 @@ class Package{
 private:
     static std::set<ElementID> assigned_IDs;
     static std::set<ElementID> freed_IDs;
-    ElementID id;
+    ElementID id_;
 
 public:
     Package();
-
     Package(const Package&) = default;
-
     Package(Package&&) = default;
-
-    ElementID get_id() const {return id;}
-
+    ElementID get_id() const {return id_;}
     Package& operator= (Package&&) = default;
-
     ~Package();
 };
 

@@ -27,8 +27,6 @@ public:
     virtual std::size_t size() const=0;
     virtual bool empty() const=0;
     virtual ~IPackageStockpile()= 0; //=default? wirtualny czy czysto wirtualny?
-
-
 };
 
 class IPackageQueue: public IPackageStockpile {
