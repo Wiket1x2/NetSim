@@ -436,6 +436,12 @@
 		<Unit filename="C:/Users/Aayli/Desktop/NetSim/Net/test/main_test.cpp">
 			<Option target="Net_Sim__test"/>
 		</Unit>
+		<Unit filename="C:/Users/Aayli/Desktop/NetSim/Net/test/test_package.cpp">
+			<Option target="Net_Sim__test"/>
+		</Unit>
+		<Unit filename="C:/Users/Aayli/Desktop/NetSim/Net/test/test_storage_types.cpp">
+			<Option target="Net_Sim__test"/>
+		</Unit>
 		<Unit filename="C:/Users/Aayli/Desktop/NetSim/Net/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

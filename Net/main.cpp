@@ -32,15 +32,15 @@ int main() {
 //    lifo.push((Package&&) A);
 //    lifo.push((Package&&) B);
 //    Package D = lifo.pop();
-//    if (D.get_id()==A.get_id())
+//    if (D.get_id()==2)
 //    std::cout<<"Lifo True"<<std::endl;
 
 //Test fifo:
 //    Package A;
 //    Package B;
-//    PackageQueue fifo(PackageQueueType::FIFO);
-//    fifo.push((Package&&) A);
-//    fifo.push((Package&&) B);
-//    Package D = fifo.pop();
-//    if (D.get_id()==A.get_id())
+//    PackageQueue lifo(PackageQueueType::LIFO);
+//    lifo.push((Package&&) A);
+//    lifo.push((Package&&) B);
+//    Package D = lifo.pop();
+//    if (D.get_id()==1)
 //    std::cout<<"Fifo True"<<std::endl;

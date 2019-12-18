@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Net_Sim__test.dir/src/simulation.cpp.obj"
   "CMakeFiles/Net_Sim__test.dir/src/storage_types.cpp.obj"
   "CMakeFiles/Net_Sim__test.dir/src/types.cpp.obj"
+  "CMakeFiles/Net_Sim__test.dir/test/test_package.cpp.obj"
+  "CMakeFiles/Net_Sim__test.dir/test/test_storage_types.cpp.obj"
   "CMakeFiles/Net_Sim__test.dir/test/main_test.cpp.obj"
   "Net_Sim__test.pdb"
   "Net_Sim__test.exe"

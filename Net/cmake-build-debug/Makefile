@@ -527,6 +527,60 @@ test/main_test.cpp.s:
 	$(MAKE) -f CMakeFiles\Net_Sim__test.dir\build.make CMakeFiles/Net_Sim__test.dir/test/main_test.cpp.s
 .PHONY : test/main_test.cpp.s
 
+test/test_package.obj: test/test_package.cpp.obj
+
+.PHONY : test/test_package.obj
+
+# target to build an object file
+test/test_package.cpp.obj:
+	$(MAKE) -f CMakeFiles\Net_Sim__test.dir\build.make CMakeFiles/Net_Sim__test.dir/test/test_package.cpp.obj
+.PHONY : test/test_package.cpp.obj
+
+test/test_package.i: test/test_package.cpp.i
+
+.PHONY : test/test_package.i
+
+# target to preprocess a source file
+test/test_package.cpp.i:
+	$(MAKE) -f CMakeFiles\Net_Sim__test.dir\build.make CMakeFiles/Net_Sim__test.dir/test/test_package.cpp.i
+.PHONY : test/test_package.cpp.i
+
+test/test_package.s: test/test_package.cpp.s
+
+.PHONY : test/test_package.s
+
+# target to generate assembly for a file
+test/test_package.cpp.s:
+	$(MAKE) -f CMakeFiles\Net_Sim__test.dir\build.make CMakeFiles/Net_Sim__test.dir/test/test_package.cpp.s
+.PHONY : test/test_package.cpp.s
+
+test/test_storage_types.obj: test/test_storage_types.cpp.obj
+
+.PHONY : test/test_storage_types.obj
+
+# target to build an object file
+test/test_storage_types.cpp.obj:
+	$(MAKE) -f CMakeFiles\Net_Sim__test.dir\build.make CMakeFiles/Net_Sim__test.dir/test/test_storage_types.cpp.obj
+.PHONY : test/test_storage_types.cpp.obj
+
+test/test_storage_types.i: test/test_storage_types.cpp.i
+
+.PHONY : test/test_storage_types.i
+
+# target to preprocess a source file
+test/test_storage_types.cpp.i:
+	$(MAKE) -f CMakeFiles\Net_Sim__test.dir\build.make CMakeFiles/Net_Sim__test.dir/test/test_storage_types.cpp.i
+.PHONY : test/test_storage_types.cpp.i
+
+test/test_storage_types.s: test/test_storage_types.cpp.s
+
+.PHONY : test/test_storage_types.s
+
+# target to generate assembly for a file
+test/test_storage_types.cpp.s:
+	$(MAKE) -f CMakeFiles\Net_Sim__test.dir\build.make CMakeFiles/Net_Sim__test.dir/test/test_storage_types.cpp.s
+.PHONY : test/test_storage_types.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -575,6 +629,12 @@ help:
 	@echo ... test/main_test.obj
 	@echo ... test/main_test.i
 	@echo ... test/main_test.s
+	@echo ... test/test_package.obj
+	@echo ... test/test_package.i
+	@echo ... test/test_package.s
+	@echo ... test/test_storage_types.obj
+	@echo ... test/test_storage_types.i
+	@echo ... test/test_storage_types.s
 .PHONY : help
 
 
