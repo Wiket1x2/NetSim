@@ -52,7 +52,7 @@ class PackageQueue {
 + ~PackageQueue()
 }
 
-IPackageStockpile <|.. IPackageQueue
+IPackageStockpile <|.. PackageQueue
 IPackageQueue <|.. PackageQueue
 IPackageQueue ..> Package : << uses >>
 PackageQueue ..> Package : << uses >>
