@@ -20,6 +20,11 @@
  }
 
 
+ Package::Package(Package&& other): id_(other.id_)  {
+     other.id_=0;
+ }
+
+
  Package& Package::operator=(Package&& other) {
      if (id_!=0) {
          assigned_IDs.erase(id_);
@@ -36,9 +41,4 @@
          assigned_IDs.erase(id_);
          freed_IDs.insert(id_);
      }
- }
-
-
- Package::Package(Package&& other): id_(other.id_)  {
-     other.id_=0;
  }
