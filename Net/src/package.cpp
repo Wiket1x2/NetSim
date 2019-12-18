@@ -4,24 +4,41 @@
  std::set<ElementID> Package::freed_IDs;
 
  Package::Package() {
-     // Take first el. from freed_IDs <set>, if it exists else take last from assigned_IDs. When assigned_IDs is empty first el. = 1.
-     // Wez pierwszy el. z freed_IDs <set>, jezeli istnieje w przeciwnym wypadku wez ostatni el. z assigned_IDs. Kiedy assigned_IDs jest pusty pierwszym el. = 1
      if (!freed_IDs.empty()) {
-         id_= *freed_IDs.begin();
+         id_= *freed_IDs.begin(); //przeciazone nie trzeba cbegin()
          freed_IDs.erase(id_);
          assigned_IDs.insert(id_);
      }
      else if (!assigned_IDs.empty()) {
-         id_= *assigned_IDs.rbegin()+1;
+         id_= *(assigned_IDs.rbegin())+1;
          assigned_IDs.insert(id_);
      }
      else {
-         id_=0;
+         id_=1; //ID to liczba calkowita dodatnia
          assigned_IDs.insert(id_);
      }
  }
 
+
+ Package& Package::operator=(Package&& other) {
+     if (id_!=0) {
+         assigned_IDs.erase(id_);
+         freed_IDs.insert(id_);
+     }
+     id_=other.id_;
+     other.id_=0; //0 reprezentuje id_ niedozwolone
+     return (*this);
+ }
+
+
  Package::~Package() {
-     assigned_IDs.erase(id_);
-     freed_IDs.insert(id_);
+     if (id_!=0) { //bo produkt ktory jest przypisywany - std::move(product) bedzie mial id_ ale nie wlasciwe....
+         assigned_IDs.erase(id_);
+         freed_IDs.insert(id_);
+     }
+ }
+
+
+ Package::Package(Package&& other): id_(other.id_)  {
+     other.id_=0;
  }

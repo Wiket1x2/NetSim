@@ -9,28 +9,22 @@
 void PackageQueue::push(Package&& package) {
     switch(storage_type_) {
         case PackageQueueType::FIFO:
-            pdeq_.emplace_back(std::move(package));
+            plist.emplace_back(std::move(package));
             break;
         case PackageQueueType::LIFO:
-            pdeq_.emplace_front(std::move(package));
+            plist.emplace_front(std::move(package));
             break;
+
     }
+
 }
 
-Package PackageQueue::pop() {
-    Package product;
-    switch(storage_type_) {
-        case PackageQueueType::FIFO:
-            product = pdeq_.front();
-            pdeq_.pop_front();
-            break;
-        case PackageQueueType::LIFO:
-            product = pdeq_.back();
-            pdeq_.pop_back();
-            break;
-    }
-    return product;
+Package PackageQueue::pop()  {
+    Package pack= std::move(*plist.begin()); //pack jest zmienna pomocnicza przechowujaca pierwszy element listy
+    plist.pop_front(); //pobieram z przodu (wlasciwe zarowno dla kolejki jak i stosu, pod warunkiem dodawania w odpowiedni sposob)
+    return pack;
 }
+
 
 
 

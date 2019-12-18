@@ -17,41 +17,42 @@ enum class PackageQueueType {
 
 class IPackageStockpile {
 public:
-    using deqP_ci=std::deque<Package>::const_iterator;
-    virtual void push(Package&& package) =0; // query - to oznacza ze metoda jest const? ale jak to? przeciez to jest pushparametr const czy nie?
+    using deqP_ci=std::list<Package>::const_iterator;
+    virtual void push(Package&& package) =0;
     virtual deqP_ci cbegin() const =0;
     virtual deqP_ci cend() const=0;
     virtual deqP_ci begin() const=0;
     virtual deqP_ci end() const=0;
     virtual std::size_t size() const=0;
     virtual bool empty() const=0;
-    virtual ~IPackageStockpile()= default; //=default? wirtualny czy czysto wirtualny?
+    virtual ~IPackageStockpile()= default; //czy w klasach potomnych tez def konstuktory override? - tak
 };
 
 class IPackageQueue: public IPackageStockpile {
 public:
-    virtual PackageQueueType get_queue_type() const =0;
-    virtual Package pop() =0;
-    virtual ~IPackageQueue() = default;
+    virtual PackageQueueType get_queue_type() const =0; //jaki typ zwracany - wartosc bo enumeration jest traktoway jak typ prosty
+    virtual Package pop()  =0;
+    virtual ~IPackageQueue() override= default;
 };
 
 class PackageQueue: public IPackageQueue {
 public:
-    PackageQueue(const PackageQueueType& storage_type): storage_type_(storage_type) {}
+    PackageQueue(PackageQueueType storage_type): storage_type_(storage_type) {}
     void push(Package&& package) override;
-    deqP_ci cbegin() const override { return pdeq_.cbegin(); }
-    deqP_ci cend() const override {return pdeq_.cend(); }
-    deqP_ci begin() const override { return pdeq_.cbegin();}
-    deqP_ci end() const override {return pdeq_.cend();}
-    std::size_t size() const override { return pdeq_.size(); }
-    bool empty() const override {return pdeq_.empty();}
+    deqP_ci cbegin() const override { return plist.cbegin(); }
+    deqP_ci cend() const override {return plist.cend(); }
+    deqP_ci begin() const override { return plist.cbegin();}
+    deqP_ci end() const override {return plist.cend();}
+    std::size_t size() const override { return plist.size(); }
+    bool empty() const override {return plist.empty();}
     PackageQueueType get_queue_type() const override { return storage_type_; }
     Package pop() override;
+    ~PackageQueue() override= default;
 
 
 private:
     PackageQueueType storage_type_;
-    std::deque<Package> pdeq_;
+    std::list<Package> plist;
 };
 
 
