@@ -470,36 +470,6 @@ src/storage_types.cpp.s:
 	$(MAKE) -f CMakeFiles\Net_Sim__test.dir\build.make CMakeFiles/Net_Sim__test.dir/src/storage_types.cpp.s
 .PHONY : src/storage_types.cpp.s
 
-src/types.obj: src/types.cpp.obj
-
-.PHONY : src/types.obj
-
-# target to build an object file
-src/types.cpp.obj:
-	$(MAKE) -f CMakeFiles\Net_Sim.dir\build.make CMakeFiles/Net_Sim.dir/src/types.cpp.obj
-	$(MAKE) -f CMakeFiles\Net_Sim__test.dir\build.make CMakeFiles/Net_Sim__test.dir/src/types.cpp.obj
-.PHONY : src/types.cpp.obj
-
-src/types.i: src/types.cpp.i
-
-.PHONY : src/types.i
-
-# target to preprocess a source file
-src/types.cpp.i:
-	$(MAKE) -f CMakeFiles\Net_Sim.dir\build.make CMakeFiles/Net_Sim.dir/src/types.cpp.i
-	$(MAKE) -f CMakeFiles\Net_Sim__test.dir\build.make CMakeFiles/Net_Sim__test.dir/src/types.cpp.i
-.PHONY : src/types.cpp.i
-
-src/types.s: src/types.cpp.s
-
-.PHONY : src/types.s
-
-# target to generate assembly for a file
-src/types.cpp.s:
-	$(MAKE) -f CMakeFiles\Net_Sim.dir\build.make CMakeFiles/Net_Sim.dir/src/types.cpp.s
-	$(MAKE) -f CMakeFiles\Net_Sim__test.dir\build.make CMakeFiles/Net_Sim__test.dir/src/types.cpp.s
-.PHONY : src/types.cpp.s
-
 test/main_test.obj: test/main_test.cpp.obj
 
 .PHONY : test/main_test.obj
@@ -623,9 +593,6 @@ help:
 	@echo ... src/storage_types.obj
 	@echo ... src/storage_types.i
 	@echo ... src/storage_types.s
-	@echo ... src/types.obj
-	@echo ... src/types.i
-	@echo ... src/types.s
 	@echo ... test/main_test.obj
 	@echo ... test/main_test.i
 	@echo ... test/main_test.s

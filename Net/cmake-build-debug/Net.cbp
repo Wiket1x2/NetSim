@@ -429,10 +429,6 @@
 			<Option target="Net_Sim"/>
 			<Option target="Net_Sim__test"/>
 		</Unit>
-		<Unit filename="C:/Users/Aayli/Desktop/NetSim/Net/src/types.cpp">
-			<Option target="Net_Sim"/>
-			<Option target="Net_Sim__test"/>
-		</Unit>
 		<Unit filename="C:/Users/Aayli/Desktop/NetSim/Net/test/main_test.cpp">
 			<Option target="Net_Sim__test"/>
 		</Unit>

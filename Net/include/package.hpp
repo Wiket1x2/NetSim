@@ -14,10 +14,10 @@ public:
     Package(); //czy mamy zamiescic drugi konstruktor Package(ElementID id): id_(id){} ktory bedzie tworzyl obiekt na podst przekazanego id - patrz wczytywanie z pliku?
     // dodac obsluge gdy id jest zajete - tak na jedno i drugie pytanie
     Package(const Package&)= delete;
-    Package(Package&& other); //czy Package&& ma byc const?
+    Package(Package&& other);
     ElementID get_id() const { return id_;}
     Package& operator=(const Package&)= delete;
-    Package& operator=(Package&& other); //gdzie const , czy const ma byc typ zwracany?
+    Package& operator=(Package&& other);
     ~Package();
 
 private:

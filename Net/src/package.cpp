@@ -14,7 +14,7 @@
          assigned_IDs.insert(id_);
      }
      else {
-         id_=1; //ID to liczba calkowita dodatnia
+         id_=1;
          assigned_IDs.insert(id_);
      }
  }

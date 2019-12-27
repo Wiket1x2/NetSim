@@ -21,7 +21,7 @@ set(SOURCE_FILES
         src/reports.cpp
         src/simulation.cpp
         src/storage_types.cpp
-        src/types.cpp)
+        )
 
 # Tu będą pliki .cpp używane tylko podczas testów jednostkowych
 set(TEST_SOURCES

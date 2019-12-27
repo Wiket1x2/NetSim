@@ -56,6 +56,4 @@ private:
 };
 
 
-
-
 #endif //NET_STORAGE_TYPES_HPP
