@@ -42,9 +42,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/nodes.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="35" column="1" lean-forward="true" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
+            <state relative-caret-position="306">
+              <caret line="57" column="35" selection-start-line="57" selection-start-column="35" selection-end-line="57" selection-end-column="35" />
               <folding>
+                <element signature="e#66#590#0" />
+                <element signature="e#592#1168#0" />
                 <element signature="e#1170#1422#0" />
                 <element signature="e#1424#1743#0" />
                 <element signature="e#1747#1988#0" />
@@ -56,10 +58,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/include/nodes.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="26" column="60" selection-start-line="26" selection-start-column="60" selection-end-line="26" selection-end-column="60" />
+            <state relative-caret-position="512">
+              <caret line="47" column="48" lean-forward="true" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="48" />
               <folding>
                 <element signature="e#87#106#0" expanded="true" />
+                <element signature="e#177#348#1" />
+                <element signature="e#353#652#1" />
               </folding>
             </state>
           </provider>
@@ -208,7 +212,7 @@
       <workItem from="1576528410223" duration="4566000" />
       <workItem from="1576678847566" duration="4067000" />
       <workItem from="1577100816871" duration="9615000" />
-      <workItem from="1577447046071" duration="27160000" />
+      <workItem from="1577447046071" duration="27305000" />
     </task>
     <task id="LOCAL-00001" summary="all">
       <created>1576520997918</created>
@@ -269,7 +273,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58622000" />
+    <option name="totallyTimeSpent" value="58767000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -282,7 +286,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="833" y="0" width="854" height="1017" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4950166" weight="0.26322418" />
       <window_info id="Structure" order="1" sideWeight="0.50498337" side_tool="true" weight="0.37990582" />
@@ -504,9 +507,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/nodes.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="35" column="1" lean-forward="true" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
+        <state relative-caret-position="306">
+          <caret line="57" column="35" selection-start-line="57" selection-start-column="35" selection-end-line="57" selection-end-column="35" />
           <folding>
+            <element signature="e#66#590#0" />
+            <element signature="e#592#1168#0" />
             <element signature="e#1170#1422#0" />
             <element signature="e#1424#1743#0" />
             <element signature="e#1747#1988#0" />
@@ -516,10 +521,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/include/nodes.hpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="26" column="60" selection-start-line="26" selection-start-column="60" selection-end-line="26" selection-end-column="60" />
+        <state relative-caret-position="512">
+          <caret line="47" column="48" lean-forward="true" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="48" />
           <folding>
             <element signature="e#87#106#0" expanded="true" />
+            <element signature="e#177#348#1" />
+            <element signature="e#353#652#1" />
           </folding>
         </state>
       </provider>
