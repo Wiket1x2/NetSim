@@ -12,43 +12,48 @@
 
 
 
+class IPackageReceiver{
+public:
+    virtual void receive_package(Package&& package);
+    virtual ElementID get_id(void) const;
+    virtual ~IPackageReceiver() = default;
+};
+
+
+
 class ReceiverPreferences{
 
 public:
     void add_receiver(IPackageReceiver* r);
+    void add_receiver(IPackageReceiver* r, double probability);
     void remove_receiver(IPackageReceiver* r);
-    IPackageReceiver* choose_receiver(void);
-
+    IPackageReceiver* choose_receiver();
 private:
     std::map<IPackageReceiver*, double> probability_map;
 };
 
 
-class PackageSender: public ReceiverPreferences{
+
+class PackageSender{
 
 public:
-    void send_package(void);
-    std::optional<Package> get_sending_buffer(void);
-
+    void send_package();
+    std::optional<Package> get_sending_buffer() const { return *this->package_; };
 protected:
-    void push_package(Package&&);
+    void push_package(Package&& package) { return package_ = package; }
 
 public:
     ReceiverPreferences receiver_preferences_;
+private:
+    std::optional<Package&> package_;
 };
+
 
 
 #endif //NET_NODES_HPP
 
 
-//class IPackageReceiver{
-//public:
-//    virtual void receive_package(Package&& package);
-//    virtual ElementID get_id(void) const;
-//    virtual ~IPackageReceiver() = default;
-//};
-//
-//
+
 //class Worker : public IPackageReceiver, public IPackageQueue{
 //public:
 //    void receive_package(Package&& package);
