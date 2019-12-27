@@ -24,8 +24,8 @@ public:
 class ReceiverPreferences{
 
 public:
-    void add_receiver(IPackageReceiver* r);
-    void add_receiver(IPackageReceiver* r, double probability);
+    void add_receiver(IPackageReceiver* r); //dawac const r?
+    void add_receiver(IPackageReceiver* r, double probability); //dodałem funkcje z 2 argumentem
     void remove_receiver(IPackageReceiver* r);
     IPackageReceiver* choose_receiver();
 private:
@@ -38,14 +38,14 @@ class PackageSender{
 
 public:
     void send_package();
-    std::optional<Package> get_sending_buffer() const { return *this->package_; };
+    std::optional<Package> get_sending_buffer() const { return *this->package_; }; //o to chodziło?
 protected:
-    void push_package(Package&& package) { return package_ = package; }
+    void push_package(Package&& package) { return package_ = package; } //o to chodziło?
 
 public:
     ReceiverPreferences receiver_preferences_;
 private:
-    std::optional<Package&> package_;
+    std::optional<Package&> package_; //dodanlem
 };
 
 

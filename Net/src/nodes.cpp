@@ -12,7 +12,7 @@ void ReceiverPreferences::add_receiver(IPackageReceiver* r) {
         probability_map.insert(std::pair<IPackageReceiver*, double>(r, probability));
     }
     else{
-        probability = ProbabilityGenerator();
+        probability = ProbabilityGenerator();  //jakie ma byc prawdopodobienstwo
         double coeff = 1-probability;
         for (auto it=probability_map.begin(); it!=probability_map.end(); ++it)
             it->second = coeff*it->second;
@@ -26,13 +26,14 @@ void ReceiverPreferences::add_receiver(IPackageReceiver* r, double probability) 
         probability_map.insert(std::pair<IPackageReceiver*, double>(r, probability));
     }
     else if (probability>=0 && probability<=1){
+// skalowanie - Czy jeżeli mam 2 obiekty o prawdopodobieństwie równym 50% i dorzucę kolejny o wartości 50% to mam otrzymać 25/25/50 %, czy 33/33/33 %?
         double coeff = 1-probability;
         for (auto it=probability_map.begin(); it!=probability_map.end(); ++it)
             it->second = coeff*it->second;
         probability_map.insert(std::pair<IPackageReceiver*, double>(r,probability));
     }
-    else throw "Wrong probability value.";
-}
+    else throw "Wrong probability value."; //czy rzucać błąd jeżeli wartość prawdopodobieństwa jest spoza zakresu [0,1]
+}//błedy numeryczne
 
 void ReceiverPreferences::remove_receiver(IPackageReceiver* r) {
     double coeff = 1-probability_map[r];;
