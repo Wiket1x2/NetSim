@@ -2,8 +2,13 @@
 // Created by Aayli on 15.12.2019.
 //
 
-#include "nodes.hpp"
+#include <nodes.hpp>
 
+#include "nodes.hpp"
+#include "helpers.hpp"
+
+
+ProbabilityGenerator PG_1 = probability_generator_1;
 
 
 void ReceiverPreferences::add_receiver(IPackageReceiver* r) {
@@ -12,7 +17,7 @@ void ReceiverPreferences::add_receiver(IPackageReceiver* r) {
         probability_map.insert(std::pair<IPackageReceiver*, double>(r, probability));
     }
     else{
-        probability = ProbabilityGenerator();  //jakie ma byc prawdopodobienstwo
+        probability = PG_1();  //jakie ma byc prawdopodobienstwo
         double coeff = 1-probability;
         for (auto it=probability_map.begin(); it!=probability_map.end(); ++it)
             it->second = coeff*it->second;
@@ -43,7 +48,7 @@ void ReceiverPreferences::remove_receiver(IPackageReceiver* r) {
 }
 
 IPackageReceiver* ReceiverPreferences::choose_receiver() {
-    double generated_number = ProbabilityGenerator();
+    double generated_number = PG_1();
     double sum = 0;
     IPackageReceiver* ptr = nullptr;
     for (auto it=probability_map.begin(); sum <= generated_number; ++it){
@@ -55,14 +60,13 @@ IPackageReceiver* ReceiverPreferences::choose_receiver() {
 
 
 
+
 void PackageSender::send_package() {
     IPackageReceiver* receiver = receiver_preferences_.choose_receiver();
-    if(get_sending_buffer()) {
-        receiver->receive_package(*this->package_.value());
-        *this->package_.reset()
+    if(package_) {
+        receiver->receive_package(std::move(package_.value()));
+        package_.reset();
     }
 }
-
-
 
 

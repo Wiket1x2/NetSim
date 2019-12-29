@@ -12,7 +12,7 @@ class Package{
 
 public:
     Package(); //czy mamy zamiescic drugi konstruktor Package(ElementID id): id_(id){} ktory bedzie tworzyl obiekt na podst przekazanego id - patrz wczytywanie z pliku?
-    // dodac obsluge gdy id jest zajete - tak na jedno i drugie pytanie
+    // dodac obsluge gdy id jest zajete - tak na jedno i drugie pytanie // podczas robienia tego if(id!=other.id)
     Package(const Package&)= delete;
     Package(Package&& other);
     ElementID get_id() const { return id_;}
