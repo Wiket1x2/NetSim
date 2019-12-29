@@ -38,14 +38,14 @@ class PackageSender{
 
 public:
     void send_package();
-    std::optional<Package> get_sending_buffer() const { return *this->package_; }; //o to chodziło?
+//    std::optional<Package> get_sending_buffer() const { return package_;} //Problem
 protected:
-    void push_package(Package&& package) { return package_ = package; } //o to chodziło?
+    void push_package(Package&& package) { package_ = std::move(package); } //o to chodziło?
 
 public:
     ReceiverPreferences receiver_preferences_;
 private:
-    std::optional<Package&> package_; //dodanlem
+    std::optional<Package> package_; //dodanlem
 };
 
 
