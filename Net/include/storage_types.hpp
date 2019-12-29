@@ -10,10 +10,7 @@
 #include <list>
 
 
-enum class PackageQueueType {
-    FIFO,
-    LIFO,
-};
+enum class PackageQueueType {FIFO, LIFO};
 
 class IPackageStockpile {
 public:

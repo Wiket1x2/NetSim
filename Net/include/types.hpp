@@ -11,7 +11,10 @@
 #include <functional>
 
 
+
 using ElementID = unsigned int;
+using Time = unsigned int; //pisze typ całkowity
+using TimeOffset = unsigned int; //pisze typ całkowity
 using ProbabilityGenerator = std::function<double()>;
 
 
