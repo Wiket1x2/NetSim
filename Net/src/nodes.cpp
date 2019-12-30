@@ -20,7 +20,7 @@ void ReceiverPreferences::add_receiver(IPackageReceiver* r) {
         probability_map.insert(std::pair<IPackageReceiver*, double>(r, probability));
     }
     else{
-        probability = PG();  //jakie ma byc prawdopodobienstwo
+        probability = 1/probability_map.size()+1;  //prawdopodobienstwo wyboru jest identyczne dla każdego odbiorcy
         double coeff = 1-probability;
         for (auto it=probability_map.begin(); it!=probability_map.end(); ++it)
             it->second = coeff*it->second;
@@ -34,30 +34,37 @@ void ReceiverPreferences::add_receiver(IPackageReceiver* r, double probability) 
         probability_map.insert(std::pair<IPackageReceiver*, double>(r, probability));
     }
     else if (probability>=0 && probability<=1){
-// skalowanie - Czy jeżeli mam 2 obiekty o prawdopodobieństwie równym 50% i dorzucę kolejny o wartości 50% to mam otrzymać 25/25/50 %, czy 33/33/33 %?
         double coeff = 1-probability;
         for (auto it=probability_map.begin(); it!=probability_map.end(); ++it)
             it->second = coeff*it->second;
         probability_map.insert(std::pair<IPackageReceiver*, double>(r,probability));
     }
     else throw "Wrong probability value."; //czy rzucać błąd jeżeli wartość prawdopodobieństwa jest spoza zakresu [0,1]
-}//błedy numeryczne
+}
 
 void ReceiverPreferences::remove_receiver(IPackageReceiver* r) {
-    double coeff = 1-probability_map[r];;
-    probability_map.erase(r);
-    for (auto it=probability_map.begin(); it!=probability_map.end(); ++it)
-        it->second = coeff*it->second;
+    if (!probability_map.empty()){
+        double coeff = 1-probability_map[r];;
+        probability_map.erase(r);
+        for (auto it=probability_map.begin(); it!=probability_map.end(); ++it)
+            it->second = coeff*it->second;
+    }
+    else throw "You don't have receiver"; //czy rzucać błąd kiedy pusty?
 }
 
 IPackageReceiver* ReceiverPreferences::choose_receiver() {
     double generated_number = PG();
     double sum = 0;
     IPackageReceiver* ptr = nullptr;
-    for (auto it=probability_map.begin(); sum <= generated_number; ++it){
-        sum += it->second;
-        ptr = it->first;
+
+    if (!probability_map.empty()){
+        for (auto it=probability_map.begin(); sum <= generated_number; ++it){
+            sum += it->second;
+            ptr = it->first;
+        }
     }
+    else throw "You don't have receiver"; //czy rzucać błąd kiedy pusty?
+
     return ptr;
 }
 

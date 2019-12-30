@@ -27,11 +27,11 @@ class ReceiverPreferences{
 public:
     using preferences_t = std::map<IPackageReceiver*, double>;
     ReceiverPreferences() = default;
-//    ReceiverPreferences(ProbabilityGenerator* PG): PG_(PG) {}  //Wyczytane z konspektu. Czy to ma być?
-    void add_receiver(IPackageReceiver* r); //dawac const r?
+//    ReceiverPreferences(ProbabilityGenerator* PG): PG_(PG) {}  //Wyczytane z konspektu. Jak to ma działać?
+    void add_receiver(IPackageReceiver* r); //kiedy const r?
     void add_receiver(IPackageReceiver* r, double probability); //dodałem funkcje z 2 argumentem
-    void remove_receiver(IPackageReceiver* r); //dodaj warunek gdy usowamy ostatniego dostawce
-    IPackageReceiver* choose_receiver(); //sprawdzanie czy jest jakiś dostawca
+    void remove_receiver(IPackageReceiver* r);
+    IPackageReceiver* choose_receiver();
 private:
     preferences_t probability_map;
 //    ProbabilityGenerator PG_;    //Wyczytane z konspektu. Czy to ma być? Czy uchwyt do funkcji moze nie być wskaźnikiem?
@@ -101,6 +101,7 @@ private:
 };
 
 //Magazyn półproduktów
+//sprawdzić const
 
 
 #endif //NET_NODES_HPP
