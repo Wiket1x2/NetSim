@@ -121,15 +121,14 @@ void Worker::do_work(Time t) {
     if (t==0) {
         start_t=0;
     }
-    if (!processing_buffor_.has_value() && (t-start_t==0 || t-start_t==pd_)) {
+    if (!q_->empty() && !processing_buffor_.has_value() && (t - start_t == 0 || t - start_t == pd_)) {
         processing_buffor_.emplace(q_->pop()); // przekazanie do bufora przetwarzania gdy jest pusty
-        start_t=t;
+        start_t = t;
     }
     if(t-start_t==pd_-1) {
         push_package(std::move(processing_buffor_.value()));
         processing_buffor_.reset();
     }
-
 }
 
 Worker::~Worker() {

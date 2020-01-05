@@ -41,7 +41,7 @@ public:
     std::size_t size() const override { return plist.size(); }
     bool empty() const override { return plist.empty(); }
     PackageQueueType get_queue_type() const override { return storage_type_; }
-    Package pop() override;  //FIXME bład gdy plist jest puste
+    Package pop() override;
     ~PackageQueue() override = default;
 
 private:
