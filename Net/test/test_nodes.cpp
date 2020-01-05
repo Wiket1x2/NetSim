@@ -48,9 +48,9 @@ TEST(PackageSenderTest, bufor) {
 
     R.receiver_preferences_.add_receiver(&W);
     R.deliver_goods(1);
-    ASSERT_EQ(R.get_sending_buffer(), true);
+    ASSERT_EQ(R.is_sending_buffer(), true);
     R.send_package();
-    ASSERT_EQ(R.get_sending_buffer(), false);
+    ASSERT_EQ(R.is_sending_buffer(), false);
 }
 
 TEST(RampTest, deliver_goods) {
@@ -58,16 +58,16 @@ TEST(RampTest, deliver_goods) {
 
     Ramp R1(1,1, pref);
     Ramp R2(2,2, pref);
-    ASSERT_EQ(R1.get_sending_buffer(), false);
-    ASSERT_EQ(R2.get_sending_buffer(), false);
+    ASSERT_EQ(R1.is_sending_buffer(), false);
+    ASSERT_EQ(R2.is_sending_buffer(), false);
 
     R1.deliver_goods(1);
     R2.deliver_goods(1);
-    ASSERT_EQ(R1.get_sending_buffer(), true);
-    ASSERT_EQ(R2.get_sending_buffer(), false);
+    ASSERT_EQ(R1.is_sending_buffer(), true);
+    ASSERT_EQ(R2.is_sending_buffer(), false);
 
     R2.deliver_goods(2);
-    ASSERT_EQ(R2.get_sending_buffer(), true);
+    ASSERT_EQ(R2.is_sending_buffer(), true);
 }
 
 TEST(ReciveTest, send_and_recive) {

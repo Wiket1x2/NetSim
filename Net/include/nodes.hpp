@@ -57,7 +57,7 @@ public:
     ReceiverPreferences receiver_preferences_;
     void send_package();
 //    std::optional<Package> get_sending_buffer() const {return buffor_package_;} //TODO problem - jak zwrocic buffor_package_ POPYTAJ
-    bool get_sending_buffer() const {return bool(buffor_package_);} //TODO tymczasowa pomoc do testów
+    bool is_sending_buffer() const {return bool(buffor_package_);} //TODO tymczasowa pomoc do testów
     virtual ~PackageSender()= default;
 protected:
     void push_package(Package&& package); //FIXME a co jesli bufor juz byl pelny? - poprawione ale oczekuje na odp (R) ok, można zabezpieczyc
