@@ -1,33 +1,29 @@
-//
-// Created by krzys on 10.12.2019.
-//
+// 5: Kasztelewicz (302858), Szczerba (302924), Gorecki (302847)
 
-#ifndef NET_PACKAGE_HPP
-#define NET_PACKAGE_HPP
-#include <iostream>
-#include <set>
+#ifndef NET_SIM_PACKAGE_HPP
+#define NET_SIM_PACKAGE_HPP
+
 #include "types.hpp"
-#include <memory>
+#include <set>
+#include <stdexcept>
 
-class Package{
+class Package {
 
 public:
-    Package(); //czy mamy zamiescic drugi konstruktor Package(ElementID id): id_(id){} ktory bedzie tworzyl obiekt na podst przekazanego id - patrz wczytywanie z pliku?
-    // dodac obsluge gdy id jest zajete - tak na jedno i drugie pytanie // podczas robienia tego if(id!=other.id)
-    Package(const Package&)= delete;
-    Package(Package&& other): id_(other.id_)  { other.id_=0; }
-    ElementID get_id() const { return id_;}
-    Package& operator=(const Package&)= delete;
-    Package& operator=(Package&& other);
+    Package();
+    explicit Package(ElementID id);
+    Package(const Package&) = delete;
+    Package(Package&& other) noexcept: id_(other.id_) { other.id_ = 0; }
+    Package& operator=(const Package&) = delete;
+    Package& operator=(Package&& other) noexcept;
+    ElementID get_id() const { return id_; }
     ~Package();
-
 private:
+    ElementID id_=0;
     static std::set<ElementID> assigned_IDs;
     static std::set<ElementID> freed_IDs;
-    ElementID id_;
 };
 
+#endif //NET_SIM_PACKAGE_HPP
 
-
-
-#endif //NET_PACKAGE_HPP
+// 5: Kasztelewicz (302858), Szczerba (302924), Gorecki (302847)

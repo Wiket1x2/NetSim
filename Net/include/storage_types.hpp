@@ -1,51 +1,48 @@
-//
-// Created by krzys on 15.12.2019.
-//
+// 5: Kasztelewicz (302858), Szczerba (302924), Gorecki (302847)
 
-#ifndef NET_STORAGE_TYPES_HPP
-#define NET_STORAGE_TYPES_HPP
+#ifndef NET_SIM_STORAGE_TYPES_HPP
+#define NET_SIM_STORAGE_TYPES_HPP
 
 #include "package.hpp"
-#include <deque>
+
 #include <list>
 
 
-enum class PackageQueueType {FIFO, LIFO};
+enum class PackageQueueType {FIFO, LIFO,};
 
 class IPackageStockpile {
 public:
-    using deqP_ci=std::list<Package>::const_iterator;
-    virtual void push(Package&& package) =0;
-    virtual deqP_ci cbegin() const =0;
-    virtual deqP_ci cend() const=0;
-    virtual deqP_ci begin() const=0;
-    virtual deqP_ci end() const=0;
-    virtual std::size_t size() const=0;
-    virtual bool empty() const=0;
-    virtual ~IPackageStockpile()= default; //czy w klasach potomnych tez def konstuktory override? - tak
+    using lstP_ci=std::list<Package>::const_iterator;
+    virtual void push(Package&& package) = 0;
+    virtual lstP_ci cbegin() const = 0;
+    virtual lstP_ci cend() const = 0;
+    virtual lstP_ci begin() const = 0;
+    virtual lstP_ci end() const = 0;
+    virtual std::size_t size() const = 0;
+    virtual bool empty() const = 0;
+    virtual ~IPackageStockpile() = default;
 };
 
-class IPackageQueue: public IPackageStockpile {
+class IPackageQueue : public IPackageStockpile {
 public:
-    virtual PackageQueueType get_queue_type() const =0; //jaki typ zwracany - wartosc bo enumeration jest traktoway jak typ prosty
-    virtual Package pop()  =0;
-    virtual ~IPackageQueue() override= default;
+    virtual PackageQueueType get_queue_type() const = 0;
+    virtual Package pop() = 0;
+    virtual ~IPackageQueue() override = default;
 };
 
-class PackageQueue: public IPackageQueue {
+class PackageQueue : public IPackageQueue {
 public:
-    PackageQueue(PackageQueueType storage_type): storage_type_(storage_type) {}
+    PackageQueue(PackageQueueType storage_type) : storage_type_(storage_type) {}
     void push(Package&& package) override;
-    deqP_ci cbegin() const override { return plist.cbegin(); }
-    deqP_ci cend() const override {return plist.cend(); }
-    deqP_ci begin() const override { return plist.cbegin();}
-    deqP_ci end() const override {return plist.cend();}
+    lstP_ci cbegin() const override { return plist.cbegin(); }
+    lstP_ci cend() const override { return plist.cend(); }
+    lstP_ci begin() const override { return plist.cbegin(); }
+    lstP_ci end() const override { return plist.cend(); }
     std::size_t size() const override { return plist.size(); }
-    bool empty() const override {return plist.empty();}
+    bool empty() const override { return plist.empty(); }
     PackageQueueType get_queue_type() const override { return storage_type_; }
-    Package pop() override;
-    ~PackageQueue() override= default;
-
+    Package pop() override;  //FIXME bład gdy plist jest puste
+    ~PackageQueue() override = default;
 
 private:
     PackageQueueType storage_type_;
@@ -53,4 +50,7 @@ private:
 };
 
 
-#endif //NET_STORAGE_TYPES_HPP
+
+#endif //NET_SIM_STORAGE_TYPES_HPP
+
+// 5: Kasztelewicz (302858), Szczerba (302924), Gorecki (302847)

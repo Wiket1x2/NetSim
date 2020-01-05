@@ -1,8 +1,8 @@
 //
-// Created by Aayli on 15.12.2019.
+// Created by krzys on 10.12.2019.
 //
 
-#ifndef NET_REPORTS_HPP
-#define NET_REPORTS_HPP
+#ifndef NET_SIM_REPORTS_HPP
+#define NET_SIM_REPORTS_HPP
 
-#endif //NET_REPORTS_HPP
+#endif //NET_SIM_REPORTS_HPP

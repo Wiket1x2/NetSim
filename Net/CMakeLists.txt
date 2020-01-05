@@ -1,7 +1,7 @@
 # Zdefiniuj projekt o nazwie "...".
 # Korzystaj ze standardu C++17
 cmake_minimum_required(VERSION 3.8)
-project(Net)
+project(Net_Sim)
 
 set(CMAKE_CXX_STANDARD 17)
 # Ustaw flagi kompilacji
@@ -26,7 +26,7 @@ set(SOURCE_FILES
 # Tu będą pliki .cpp używane tylko podczas testów jednostkowych
 set(TEST_SOURCES
         test/test_package.cpp
-        test/test_storage_types.cpp) #plik z funkcją main() do testów
+        test/test_storage_types.cpp test/test_nodes.cpp) #plik z funkcją main() do testów
 
 #dodaje bibliotekę Google Test, kompiluje ją z użyciem CMakeLists.txt z folderu googletest-master
 add_subdirectory(googletest-master)
