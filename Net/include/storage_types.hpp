@@ -8,16 +8,16 @@
 #include <list>
 
 
-enum class PackageQueueType {FIFO, LIFO,};
+enum class PackageQueueType {FIFO, LIFO};
 
 class IPackageStockpile {
 public:
-    using lstP_ci=std::list<Package>::const_iterator;
+    using const_iterator=std::list<Package>::const_iterator;
     virtual void push(Package&& package) = 0;
-    virtual lstP_ci cbegin() const = 0;
-    virtual lstP_ci cend() const = 0;
-    virtual lstP_ci begin() const = 0;
-    virtual lstP_ci end() const = 0;
+    virtual const_iterator cbegin() const = 0;
+    virtual const_iterator cend() const = 0;
+    virtual const_iterator begin() const = 0;
+    virtual const_iterator end() const = 0;
     virtual std::size_t size() const = 0;
     virtual bool empty() const = 0;
     virtual ~IPackageStockpile() = default;
@@ -34,10 +34,10 @@ class PackageQueue : public IPackageQueue {
 public:
     PackageQueue(PackageQueueType storage_type) : storage_type_(storage_type) {}
     void push(Package&& package) override;
-    lstP_ci cbegin() const override { return plist.cbegin(); }
-    lstP_ci cend() const override { return plist.cend(); }
-    lstP_ci begin() const override { return plist.cbegin(); }
-    lstP_ci end() const override { return plist.cend(); }
+    const_iterator cbegin() const override { return plist.cbegin(); }
+    const_iterator cend() const override { return plist.cend(); }
+    const_iterator begin() const override { return plist.cbegin(); }
+    const_iterator end() const override { return plist.cend(); }
     std::size_t size() const override { return plist.size(); }
     bool empty() const override { return plist.empty(); }
     PackageQueueType get_queue_type() const override { return storage_type_; }

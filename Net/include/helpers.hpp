@@ -1,16 +1,22 @@
-//
-// Created by krzys on 10.12.2019.
-//
+// 5: Kasztelewicz (302858), Szczerba (302924), Gorecki (302847)
 
 #ifndef NET_SIM_HELPERS_HPP
 #define NET_SIM_HELPERS_HPP
 
+
+#include <functional>
 #include <random>
-#include <cstdlib>
 
+#include "types.hpp"
 
-double probability_generator_1();
-double probability_generator_2();
+extern std::random_device rd;
+extern std::mt19937 rng;
+
+extern double default_probability_generator();
+
+extern ProbabilityGenerator probability_generator;
 
 
 #endif //NET_SIM_HELPERS_HPP
+
+// 5: Kasztelewicz (302858), Szczerba (302924), Gorecki (302847)
