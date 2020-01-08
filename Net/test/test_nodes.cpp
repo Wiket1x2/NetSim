@@ -8,18 +8,13 @@
 
 double pg() { return 0.6; }
 
-
 TEST(ReciverTest, sendingPackage) {
     ReceiverPreferences receiver(pg);
 
-    std::unique_ptr<IPackageStockpile> s1(new PackageQueue(PackageQueueType::LIFO));
-    Storehouse S1(1,std::move(s1));
-    std::unique_ptr<IPackageStockpile> s2(new PackageQueue(PackageQueueType::LIFO));
-    Storehouse S2(2,std::move(s2));
-    std::unique_ptr<IPackageStockpile> s3(new PackageQueue(PackageQueueType::LIFO));
-    Storehouse S3(3,std::move(s3));
-    std::unique_ptr<IPackageStockpile> s4(new PackageQueue(PackageQueueType::LIFO));
-    Storehouse S4(4,std::move(s4));
+    Storehouse S1(1);
+    Storehouse S2(2);
+    Storehouse S3(3);
+    Storehouse S4(4);
 
     //Dodawanie
     receiver.add_receiver(&S1);
@@ -47,9 +42,7 @@ TEST(ReciverTest, sendingPackage) {
 }
 
 TEST(PackageSenderTest, bufor) {
-    std::unique_ptr<PackageQueue> a(new PackageQueue(PackageQueueType::LIFO));
-    Worker W(1,1,std::move(a));
-
+    Worker W(1,1);
     Ramp R(1,1);
 
     R.receiver_preferences_.add_receiver(&W);
@@ -75,19 +68,15 @@ TEST(RampTest, deliver_goods) {
 }
 
 TEST(ReciveTest, send_and_recive) {
-    std::unique_ptr<IPackageStockpile> s(new PackageQueue(PackageQueueType::LIFO));
-    Storehouse S(1,std::move(s));
+    Storehouse S(1);
 
-    std::unique_ptr<PackageQueue> a(new PackageQueue(PackageQueueType::LIFO));
-    Worker W(1,1,std::move(a));
-
+    Worker W(1,1);
     W.receiver_preferences_.add_receiver(&S);
     ASSERT_EQ(W.begin(), W.end());
 
     Ramp R(1,1);
     R.receiver_preferences_.add_receiver(&W);
     ASSERT_EQ(S.begin(), S.end());
-
 
     R.deliver_goods(1);
     R.send_package();
@@ -100,11 +89,8 @@ TEST(ReciveTest, send_and_recive) {
 }
 
 TEST(WorkerTest, do_work) {
-    std::unique_ptr<IPackageStockpile> s(new PackageQueue(PackageQueueType::LIFO));
-    Storehouse S(1,std::move(s));
-
-    std::unique_ptr<PackageQueue> a(new PackageQueue(PackageQueueType::LIFO));
-    Worker W(1,3,std::move(a));
+    Storehouse S(1);
+    Worker W(1,3);
     W.receiver_preferences_.add_receiver(&S);
 
     //pierwsza tura

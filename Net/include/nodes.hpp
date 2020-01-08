@@ -85,7 +85,7 @@ private:
 
 class Worker : public PackageSender, public IPackageReceiver{
 public:
-    Worker(ElementID id, TimeOffset pd, std::unique_ptr<IPackageQueue> q);
+    Worker(ElementID id, TimeOffset pd, std::unique_ptr<IPackageQueue> q=std::make_unique<PackageQueue>(PackageQueueType::FIFO));
     void do_work(Time t);
     TimeOffset get_processing_duration() const { return pd_; }
     Time get_package_processing_start_time() const { return start_t;}
@@ -109,7 +109,7 @@ private:
 
 class Storehouse: public IPackageReceiver{
 public:
-    Storehouse(ElementID id, std::unique_ptr<IPackageStockpile> d); //d=std::make_unique<PackageQueue>(PackageQueue(PackageQueueType::FIFO)) //TODO jak to zrobic - wyrzuca blad...
+    Storehouse(ElementID id, std::unique_ptr<IPackageStockpile> d=std::make_unique<PackageQueue>(PackageQueueType::FIFO));
     void receive_package (Package&& p) override { d_->push(std::move(p)); }
     ElementID get_id() const override { return id_; }
     lstP_ci cbegin() const override {return d_->cbegin();} //o to chodzilo z metodami delegujacymi (wywoluja te [nadpisane] z klasy IPackageStockpile)
