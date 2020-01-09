@@ -25,26 +25,15 @@ void ReceiverPreferences::add_receiver(IPackageReceiver* r) {
     }
 }
 
-void ReceiverPreferences::add_receiver(IPackageReceiver* r, double probability) {
-    if (probability_map.empty()){
-        probability = 1.0;
-        probability_map.insert(std::pair<IPackageReceiver*, double>(r, probability));
-    }
-    else if (probability>=0 && probability<=1){
-        double coeff = 1.0-probability;
-        for (auto it=probability_map.begin(); it!=probability_map.end(); ++it)
-            it->second = coeff*(it->second);
-        probability_map.insert(std::pair<IPackageReceiver*, double>(r,probability));
-    }
-    else throw std::invalid_argument("Wrong probability value.");
-}
-
 void ReceiverPreferences::remove_receiver(IPackageReceiver* r) {
     if (!probability_map.empty()){
-        double coeff = 1.0/probability_map[r]/(probability_map.size()-1);
-        probability_map.erase(r);
-        for (auto it=probability_map.begin(); it!=probability_map.end(); ++it)
-            it->second = (coeff)*(it->second);
+        if(probability_map.size()>1) {
+            double coeff = 1.0 / probability_map[r] / (probability_map.size() - 1);
+            probability_map.erase(r);
+            for (auto it = probability_map.begin(); it != probability_map.end(); ++it)
+                it->second = (coeff) * (it->second);
+        }
+        else if (probability_map.size()==1) probability_map.erase(r);
     }
 }
 
@@ -66,8 +55,8 @@ IPackageReceiver* ReceiverPreferences::choose_receiver() {
 
 //PackageSender
 void PackageSender::send_package() {
-    IPackageReceiver* receiver = receiver_preferences_.choose_receiver();
     if(buffor_package_) {
+        IPackageReceiver* receiver = receiver_preferences_.choose_receiver();
         receiver->receive_package(std::move(buffor_package_.value()));
         buffor_package_.reset();
     }
@@ -103,14 +92,11 @@ Worker::Worker(ElementID id, TimeOffset pd, std::unique_ptr<IPackageQueue> q) {
 }
 
 void Worker::do_work(Time t) {
-    if (t==0) {
-        start_t=0;
+    if(!q_->empty() && !processing_buffer_.has_value()) {
+        processing_buffer_.emplace(q_->pop());
+        start_t=t;
     }
-    if (!q_->empty() && !processing_buffer_ && (t - start_t == 0 || t - start_t == pd_)) {
-        processing_buffer_.emplace(q_->pop()); // przekazanie do bufora przetwarzania gdy jest pusty
-        start_t = t;
-    }
-    if(t-start_t==pd_-1 && processing_buffer_) {
+    if(processing_buffer_.has_value() && t-start_t==pd_-1) {
         push_package(std::move(processing_buffer_.value()));
         processing_buffer_.reset();
     }
