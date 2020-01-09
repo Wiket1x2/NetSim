@@ -8,7 +8,7 @@
 
 double pg() { return 0.6; }
 
-TEST(ReciverTest, sendingPackage) {
+TEST(ReciverTest, scaling_probability) {
     ReceiverPreferences receiver(pg);
 
     Storehouse S1(1);
@@ -53,18 +53,32 @@ TEST(PackageSenderTest, bufor) {
 }
 
 TEST(RampTest, deliver_goods) {
+    Storehouse S(1);
     Ramp R1(1,1);
     Ramp R2(2,2);
+    R1.receiver_preferences_.add_receiver(&S);
+    R2.receiver_preferences_.add_receiver(&S);
     ASSERT_EQ(R1.get_sending_buffer().has_value(), false);
     ASSERT_EQ(R2.get_sending_buffer().has_value(), false);
 
     R1.deliver_goods(1);
     R2.deliver_goods(1);
     ASSERT_EQ(R1.get_sending_buffer()->get_id(), 1);
-    ASSERT_EQ(R2.get_sending_buffer().has_value(), false);
-
-    R2.deliver_goods(2);
     ASSERT_EQ(R2.get_sending_buffer()->get_id(), 2);
+    R1.send_package();
+    R2.send_package();
+
+    R1.deliver_goods(2);
+    R2.deliver_goods(2);
+    ASSERT_EQ(R1.get_sending_buffer()->get_id(), 3);
+    ASSERT_EQ(R2.get_sending_buffer().has_value(), false);
+    R1.send_package();
+    R2.send_package();
+
+    R1.deliver_goods(3);
+    R2.deliver_goods(3);
+    ASSERT_EQ(R1.get_sending_buffer()->get_id(), 4);
+    ASSERT_EQ(R2.get_sending_buffer()->get_id(), 5);
 }
 
 TEST(ReciveTest, send_and_recive) {
@@ -116,4 +130,52 @@ TEST(WorkerTest, do_work) {
     W.send_package();
     W.do_work(4);
     ASSERT_EQ(++W.begin(), --W.end());
+}
+
+TEST(NodesTest, small_simulation) {
+    Ramp R1 (1,1);
+    Ramp R2 (2,2);
+    Worker W1 (1,2);
+    Worker W2 (2, 1);
+    Storehouse S(1);
+
+    R1.receiver_preferences_.add_receiver(&W1);
+    R2.receiver_preferences_.add_receiver(&W2);
+    W1.receiver_preferences_.add_receiver(&W2);
+    W2.receiver_preferences_.add_receiver(&S);
+
+    //pierwsza tura
+    R1.deliver_goods(1);
+    R2.deliver_goods(1);
+    ASSERT_EQ(R1.get_sending_buffer()->get_id(), 1);
+    ASSERT_EQ(R2.get_sending_buffer()->get_id(), 2);
+    R1.send_package();
+    R2.send_package();
+    W1.send_package();
+    W2.send_package();
+    ASSERT_EQ(W1.cbegin()->get_id(),1);
+    ASSERT_EQ(W2.cbegin()->get_id(), 2);
+    W1.do_work(1);
+    W2.do_work(1);
+    ASSERT_EQ(W1.get_sending_buffer().has_value(), false);
+    ASSERT_EQ(W2.get_sending_buffer()->get_id(), 2);
+
+    R2.receiver_preferences_.remove_receiver(&W2);
+    R2.receiver_preferences_.add_receiver(&W1);
+
+    //druga tura
+    R1.deliver_goods(2);
+    R2.deliver_goods(2);
+    ASSERT_EQ(R1.get_sending_buffer()->get_id(), 3);
+    ASSERT_EQ(R2.get_sending_buffer().has_value(), false);
+    R1.send_package();
+    R2.send_package();
+    W1.send_package();
+    W2.send_package();
+    ASSERT_EQ(W1.cbegin()->get_id(),3);
+    ASSERT_EQ(W1.get_sending_buffer().has_value(), false);
+    ASSERT_EQ(S.cbegin()->get_id(), 2);
+    W1.do_work(2);
+    W2.do_work(2);
+    ASSERT_EQ(W1.get_sending_buffer().has_value(), true);
 }

@@ -19,15 +19,14 @@ enum class ReceiverType {RAMP, WORKER, STOREHOUSE};
 
 class IPackageReceiver {
 public:
-    using lstP_ci=std::list<Package>::const_iterator;
     virtual void receive_package(Package&& p)=0;
-//TODO    virtual std::pair<ReceiverType,ElementID> get_id() const =0; to na razie nie
+//    virtual std::pair<ReceiverType,ElementID> get_id() const =0; to na razie nie
     virtual ElementID get_id() const =0;
-    virtual lstP_ci cbegin() const = 0;
-    virtual lstP_ci cend() const = 0;
-    virtual lstP_ci begin() const = 0;
-    virtual lstP_ci end() const = 0;
-    virtual ~IPackageReceiver()= default;
+    virtual IPackageStockpile::const_iterator cbegin() const = 0;
+    virtual IPackageStockpile::const_iterator cend() const = 0;
+    virtual IPackageStockpile::const_iterator begin() const = 0;
+    virtual IPackageStockpile::const_iterator end() const = 0;
+    virtual ~IPackageReceiver()= default; //klasa macierzysta
 };
 
 
@@ -39,7 +38,6 @@ public:
     ReceiverPreferences(ProbabilityGenerator pg = probability_generator): pg_(pg) {}
     const preferences_t& get_preferences() const {return probability_map;}
     void add_receiver(IPackageReceiver* r);
-    void add_receiver(IPackageReceiver* r, double probability);
     void remove_receiver(IPackageReceiver* r);
     IPackageReceiver* choose_receiver();
     const_iterator cbegin() const { return probability_map.cbegin(); }
@@ -71,7 +69,7 @@ private:
 class Ramp : public PackageSender{
 public:
     Ramp(ElementID id, TimeOffset di);
-    void deliver_goods(Time t) { if(t%di_==0) push_package(Package()); }
+    void deliver_goods(Time t) { if(t%di_==1 || di_==1) push_package(Package()); }
     TimeOffset get_delivery_interval() const { return di_; }
     ElementID get_id() const { return id_; }
     ~Ramp() override { if (id_!=0)  Ramp_IDs.erase(id_); }
@@ -91,10 +89,10 @@ public:
     Time get_package_processing_start_time() const { return start_t;}
     void receive_package (Package&& p) override { q_->push(std::move(p)); }// worker ma zawierac bufor do wysylki - ten od PS , swoja kolejke FIFO/LIFO i bufor aktualny
     ElementID get_id() const override { return id_; }
-    lstP_ci cbegin() const override {return q_->cbegin();} //czy o to chodzilo z metodami delegujacymi?
-    lstP_ci cend() const override {return q_->cend();}
-    lstP_ci begin() const override {return q_->cbegin();}
-    lstP_ci end() const override {return q_->cend();}
+    IPackageStockpile::const_iterator cbegin() const override {return q_->cbegin();} //czy o to chodzilo z metodami delegujacymi?
+    IPackageStockpile::const_iterator cend() const override {return q_->cend();}
+    IPackageStockpile::const_iterator begin() const override {return q_->cbegin();}
+    IPackageStockpile::const_iterator end() const override {return q_->cend();}
     ~Worker() override { if (id_!=0) Worker_IDs.erase(id_); }
 
 private:
@@ -112,10 +110,10 @@ public:
     Storehouse(ElementID id, std::unique_ptr<IPackageStockpile> d=std::make_unique<PackageQueue>(PackageQueueType::FIFO));
     void receive_package (Package&& p) override { d_->push(std::move(p)); }
     ElementID get_id() const override { return id_; }
-    lstP_ci cbegin() const override {return d_->cbegin();} //o to chodzilo z metodami delegujacymi (wywoluja te [nadpisane] z klasy IPackageStockpile)
-    lstP_ci cend() const override {return d_->cend();}
-    lstP_ci begin() const override {return d_->cbegin();}
-    lstP_ci end() const override {return d_->cend();}
+    IPackageStockpile::const_iterator cbegin() const override {return d_->cbegin();} //o to chodzilo z metodami delegujacymi (wywoluja te [nadpisane] z klasy IPackageStockpile)
+    IPackageStockpile::const_iterator cend() const override {return d_->cend();}
+    IPackageStockpile::const_iterator begin() const override {return d_->cbegin();}
+    IPackageStockpile::const_iterator end() const override {return d_->cend();}
     ~Storehouse() override { if (id_!=0) Storehouse_IDs.erase(id_); }
 
 private:
