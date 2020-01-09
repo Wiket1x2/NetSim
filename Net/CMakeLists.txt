@@ -26,7 +26,15 @@ set(SOURCE_FILES
 # Tu będą pliki .cpp używane tylko podczas testów jednostkowych
 set(TEST_SOURCES
         test/test_package.cpp
-        test/test_storage_types.cpp test/test_nodes.cpp) #plik z funkcją main() do testów
+        test/test_storage_types.cpp
+        test/test_nodes.cpp
+        )
+
+set(TEST_SOURCES_KUECZEK
+        test/Kueczek/test_package.cpp
+        test/Kueczek/test_storage_types.cpp
+        test/Kueczek/test_nodes.cpp
+        )
 
 #dodaje bibliotekę Google Test, kompiluje ją z użyciem CMakeLists.txt z folderu googletest-master
 add_subdirectory(googletest-master)
@@ -38,3 +46,6 @@ add_executable(Net_Sim ${SOURCE_FILES} main.cpp)
 
 #Tworzy konfigurację o nazwie konfig_test służącą do uruchamiania testów jednostkowych
 add_executable(Net_Sim__test ${SOURCE_FILES} ${TEST_SOURCES} test/main_test.cpp)
+
+#Tworzy konfigurację o nazwie konfig_test służącą do uruchamiania testów Kueczka
+add_executable(Net_Sim_test_kueczek ${SOURCE_FILES} ${TEST_SOURCES_KUECZEK} test/Kueczek/main_gtest.cpp)
