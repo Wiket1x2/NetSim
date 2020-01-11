@@ -14,14 +14,14 @@
 #include <memory>
 #include <stdexcept>
 
-enum class ReceiverType {RAMP, WORKER, STOREHOUSE};
+enum class ReceiverType {WORKER, STOREHOUSE};
 
 
 class IPackageReceiver {
 public:
     virtual void receive_package(Package&& p)=0;
-//    virtual std::pair<ReceiverType,ElementID> get_id() const =0; to na razie nie
     virtual ElementID get_id() const =0;
+    virtual ReceiverType get_receiver_type() const =0;
     virtual IPackageStockpile::const_iterator cbegin() const = 0;
     virtual IPackageStockpile::const_iterator cend() const = 0;
     virtual IPackageStockpile::const_iterator begin() const = 0;
@@ -89,6 +89,7 @@ public:
     Time get_package_processing_start_time() const { return start_t;}
     void receive_package (Package&& p) override { q_->push(std::move(p)); }// worker ma zawierac bufor do wysylki - ten od PS , swoja kolejke FIFO/LIFO i bufor aktualny
     ElementID get_id() const override { return id_; }
+    ReceiverType get_receiver_type() const override { return rt_; };
     IPackageStockpile::const_iterator cbegin() const override {return q_->cbegin();} //czy o to chodzilo z metodami delegujacymi?
     IPackageStockpile::const_iterator cend() const override {return q_->cend();}
     IPackageStockpile::const_iterator begin() const override {return q_->cbegin();}
@@ -100,6 +101,7 @@ private:
     ElementID id_;
     TimeOffset pd_; //pd - processing duration
     Time start_t;
+    ReceiverType rt_;
     std::unique_ptr<IPackageQueue> q_;
     std::optional<Package> processing_buffer_{std::nullopt};
 };
@@ -110,6 +112,7 @@ public:
     Storehouse(ElementID id, std::unique_ptr<IPackageStockpile> d=std::make_unique<PackageQueue>(PackageQueueType::FIFO));
     void receive_package (Package&& p) override { d_->push(std::move(p)); }
     ElementID get_id() const override { return id_; }
+    ReceiverType get_receiver_type() const override { return rt_; };
     IPackageStockpile::const_iterator cbegin() const override {return d_->cbegin();} //o to chodzilo z metodami delegujacymi (wywoluja te [nadpisane] z klasy IPackageStockpile)
     IPackageStockpile::const_iterator cend() const override {return d_->cend();}
     IPackageStockpile::const_iterator begin() const override {return d_->cbegin();}
@@ -119,6 +122,7 @@ public:
 private:
     static std::set<ElementID> Storehouse_IDs;
     ElementID id_;
+    ReceiverType rt_;
     std::unique_ptr<IPackageStockpile> d_;
 };
 

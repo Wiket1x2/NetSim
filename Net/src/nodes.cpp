@@ -88,6 +88,7 @@ Worker::Worker(ElementID id, TimeOffset pd, std::unique_ptr<IPackageQueue> q) {
         q_ = std::move(q);
         Worker_IDs.insert(id_);
         start_t = 1;
+        rt_ = ReceiverType::WORKER;
     } else throw std::runtime_error("Zajety identyfikator");
 }
 
@@ -110,6 +111,7 @@ Storehouse::Storehouse(ElementID id, std::unique_ptr<IPackageStockpile> d) {
         id_ = id;
         d_=std::move(d);
         Storehouse_IDs.insert(id_);
+        rt_ = ReceiverType::STOREHOUSE;
     } else throw std::runtime_error("Zajety identyfikator"); //FIXME Rzucac blad? (R) tak
 }
 
