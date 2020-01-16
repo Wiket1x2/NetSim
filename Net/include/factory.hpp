@@ -40,24 +40,24 @@ private:
     container_t list_of_nodes;
 };
 
-//FIXME Z jakigoś powodu nie działają add
+
 class Factory{
-//TODO: Done. Waiting for accept:
-//    void add_ramp(Ramp&& R) {r_list.add(R);}
+//TODO: Accepted!
+    void add_ramp(Ramp&& R) {r_list.add(R);}
     void remove_ramp(ElementID id) { remove_receiver(r_list, id); }
     NodeCollection<Ramp>::iterator find_ramp_by_id(ElementID id) { return r_list.find_by_id(id); }
     NodeCollection<Ramp>::const_iterator find_ramp_by_id(ElementID id) const { return r_list.find_by_id(id); }
     NodeCollection<Ramp>::const_iterator ramp_cbegin() const { return r_list.cbegin(); }
     NodeCollection<Ramp>::const_iterator ramp_cend() const { return r_list.cend(); }
-//TODO: Done. Waiting for accept:
-//    void add_worker(Worker&& W) {w_list.add(W);}
+
+    void add_worker(Worker&& W) {w_list.add(W);}
     void remove_worker(ElementID id);
     NodeCollection<Worker>::iterator find_worker_by_id(ElementID id) { return w_list.find_by_id(id); }
     NodeCollection<Worker>::const_iterator find_worker_by_id(ElementID id) const { return w_list.find_by_id(id); }
     NodeCollection<Worker>::const_iterator worker_cbegin() const { return w_list.cbegin(); }
     NodeCollection<Worker>::const_iterator worker_cend() const { return w_list.cend(); }
-//TODO: Done. Waiting for accept:
-//    void add_storehouse(Storehouse&& S) {s_list.add(S);}
+
+    void add_storehouse(Storehouse&& S) {s_list.add(S);}
     void remove_storehouse(ElementID id);
     NodeCollection<Storehouse>::iterator find_storehouse_by_id(ElementID id) { return s_list.find_by_id(id); }
     NodeCollection<Storehouse>::const_iterator find_storehouse_by_id(ElementID id) const { return s_list.find_by_id(id); }
