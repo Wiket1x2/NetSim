@@ -4,10 +4,9 @@
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
-
 #include "config.hpp"
-
 #include "nodes.hpp"
+
 
 class MockReceiver : public IPackageReceiver {
 public:

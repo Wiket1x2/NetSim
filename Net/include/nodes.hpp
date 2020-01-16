@@ -14,6 +14,7 @@
 #include <memory>
 #include <stdexcept>
 
+
 enum class ReceiverType {WORKER, STOREHOUSE};
 
 

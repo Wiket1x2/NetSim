@@ -1,21 +1,11 @@
 //
 // Created by Aayli on 03.01.2020.
 //
-#include "gmock/gmock.h"
-#include "gtest/gtest.h"
 
+#include "gtest/gtest.h"
 #include "nodes.hpp"
 #include "package.hpp"
-#include "storage_types.hpp"
-#include "types.hpp"
-
-#include "nodes_mocks.hpp"
-#include "global_functions_mock.hpp"
-
 #include <iostream>
-
-using ::std::cout;
-using ::std::endl;
 
 
 double pg() { return 0.6; }

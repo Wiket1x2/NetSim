@@ -3,7 +3,6 @@
 //
 
 #include "gtest/gtest.h"
-
 #include "package.hpp"
 #include "storage_types.hpp"
 #include "types.hpp"
