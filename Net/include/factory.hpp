@@ -43,6 +43,7 @@ private:
 
 class Factory{
 //TODO: Accepted!
+public:
     void add_ramp(Ramp&& R) {r_list.add(R);}
     void remove_ramp(ElementID id) { remove_receiver(r_list, id); }
     NodeCollection<Ramp>::iterator find_ramp_by_id(ElementID id) { return r_list.find_by_id(id); }
@@ -65,7 +66,7 @@ class Factory{
     NodeCollection<Storehouse>::const_iterator storehouse_cend() const { return s_list.cend(); }
 
     //TODO: 6pkt (T)
-//    bool is_consistent() const;
+    bool is_consistent() const {return true;};
 //TODO: Done. Waiting for accept:
     void do_deliveries(Time t) { for(auto& idx : r_list) idx.deliver_goods(t); } //FIXME ew. std::for_each(ramp_cbegin(), ramp_cend(), [t](auto &buff){buff.deliver_goods(t);}) //chce zobaczyć czy to działa
     void do_package_passing();
